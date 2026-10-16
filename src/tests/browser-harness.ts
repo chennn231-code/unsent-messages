@@ -143,6 +143,7 @@ document.querySelector<HTMLButtonElement>("#motion")!.onclick = async () => {
       check();
     });
     const link = doc.querySelector<HTMLAnchorElement>(".primary-button")!;
+    const surface = link.querySelector<HTMLElement>(".tactile-surface")!;
     const pause = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     const box = link.getBoundingClientRect();
@@ -163,24 +164,30 @@ document.querySelector<HTMLButtonElement>("#motion")!.onclick = async () => {
     ).matches;
     if (!nativeReduced) {
       assert(
-        win.getComputedStyle(link).animationName === "physical-breathe",
+        win.getComputedStyle(surface).animationName === "physical-breathe",
         "Idle breathing missing",
       );
       pointer("pointerdown");
       await pause(120);
       assert(link.dataset.phase === "pressed", "Press state missing");
+      const pressedBox = link.getBoundingClientRect();
       assert(
-        Number(win.getComputedStyle(link).scale) <= 0.91,
+        Math.abs(pressedBox.width - box.width) < 1 &&
+          Math.abs(pressedBox.height - box.height) < 1,
+        "Link hit area must remain fixed while pressed",
+      );
+      assert(
+        Number(win.getComputedStyle(surface).scale) <= 0.96,
         "Envelope sink missing",
       );
       pointer("pointerup");
       await pause(30);
       assert(
-        win.getComputedStyle(link).animationName === "physical-release",
+        win.getComputedStyle(surface).animationName === "physical-release",
         "Release missing",
       );
       assert(
-        parseFloat(win.getComputedStyle(link).animationDuration) <= 0.2,
+        parseFloat(win.getComputedStyle(surface).animationDuration) <= 0.2,
         "Release exceeds 200ms",
       );
       await pause(240);
@@ -220,13 +227,14 @@ document.querySelector<HTMLButtonElement>("#motion")!.onclick = async () => {
     pointer("pointerdown");
     pointer("pointerup");
     await pause(30);
-    const reduced = win.getComputedStyle(link);
+    const reduced = win.getComputedStyle(surface);
     assert(
       reduced.animationName === "none" && reduced.transitionDuration === "0s",
       "Reduced motion still animates",
     );
     assert(
-      reduced.scale === "1" && reduced.outlineStyle === "solid",
+      reduced.scale === "1" &&
+        win.getComputedStyle(link).outlineStyle === "solid",
       "Static highlight missing",
     );
     rows.push("PASS: 正式減少動態 CSS + 模擬偏好：無動畫、無縮放、靜態高亮");

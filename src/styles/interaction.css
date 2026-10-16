@@ -1,19 +1,36 @@
-/* Motion decorates existing links. It never delays navigation or storage. */
+/* Stable link hit areas; only the inner paper surface moves. */
 .physical-target {
   --idle-period: 3.6s;
-  --interaction-glow: rgb(232 196 154 / 0.15);
+  --press-scale: 0.95;
+  --press-depth: 0.125rem;
   cursor: pointer;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  filter: brightness(var(--feedback-brightness, 1))
-    drop-shadow(0 0 0.75rem var(--interaction-glow));
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  touch-action: manipulation;
+}
+.tactile-surface {
+  display: flex;
+  align-items: center;
+  justify-content: inherit;
+  gap: inherit;
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: inherit;
+  width: 100%;
+  padding: var(--target-padding, 0);
   transform-origin: center;
   transition:
-    scale 160ms ease-out,
-    translate 160ms ease-out,
-    filter 160ms ease-out;
-  animation: physical-breathe var(--idle-period) ease-in-out infinite;
-  touch-action: manipulation;
+    scale 100ms ease-out,
+    translate 100ms ease-out,
+    background-color 120ms ease-out;
+}
+.physical-target[data-idle="true"] > .tactile-surface {
+  animation: physical-breathe var(--idle-period) ease-in-out
+    var(--idle-delay, 0s) infinite;
 }
 @keyframes physical-breathe {
   0%,
@@ -25,61 +42,84 @@
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  .physical-target:hover {
+  .physical-target:hover > .tactile-surface {
     animation: none;
-    scale: 1.08;
-    --feedback-brightness: 1.04;
-    --interaction-glow: rgb(232 196 154 / 0.3);
+  }
+  .primary-button:hover > .tactile-surface {
+    translate: 0 -0.125rem;
+    filter: drop-shadow(0 0 0.5rem rgb(232 196 154 / 0.15));
   }
 }
-.physical-target[data-phase="pressed"] {
+.physical-target[data-phase="pressed"] > .tactile-surface {
   animation: none;
-  scale: 0.95;
-  translate: 0 0.1875rem;
-  transition-duration: 100ms;
+  scale: var(--press-scale);
+  translate: 0 var(--press-depth);
 }
-.physical-target[data-feedback="envelope"][data-phase="pressed"] {
-  scale: 0.9;
+.physical-target[data-feedback="envelope"] {
+  --press-scale: 0.95;
 }
-.physical-target[data-phase="release"] {
-  animation: physical-release 200ms ease-out both;
+.physical-target[data-phase="release"] > .tactile-surface {
+  animation: physical-release 180ms ease-out both;
 }
 @keyframes physical-release {
   0% {
-    scale: 0.95;
-    translate: 0 0.1875rem;
+    scale: var(--press-scale);
+    translate: 0 var(--press-depth);
   }
-  55% {
-    scale: 1.05;
-    translate: 0 -0.0625rem;
+  65% {
+    scale: 1.03;
+    translate: 0 -0.025rem;
   }
   100% {
     scale: 1;
     translate: 0 0;
   }
 }
+.touch-echo {
+  position: absolute;
+  inset: 0.2rem;
+  border: 1px solid var(--color-wood);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+.physical-target[data-phase="release"] .touch-echo {
+  animation: touch-echo 220ms ease-out;
+}
+@keyframes touch-echo {
+  0% {
+    opacity: 0.35;
+    scale: 0.98;
+  }
+  100% {
+    opacity: 0;
+    scale: 1.035;
+  }
+}
 .physical-target:focus-visible {
-  animation: none;
-  outline: 2px solid var(--color-lamp, #e8c49a);
+  outline: 2px solid var(--color-lamp);
   outline-offset: 4px;
 }
-/* Leave text and click targets untouched when motion is reduced. */
+.physical-target:focus-visible > .tactile-surface {
+  animation: none;
+}
 @media (prefers-reduced-motion: reduce) {
-  .physical-target,
-  .physical-target:hover,
-  .physical-target[data-phase="pressed"],
-  .physical-target[data-feedback="envelope"][data-phase="pressed"],
-  .physical-target[data-phase="release"] {
+  .physical-target .tactile-surface,
+  .physical-target:hover > .tactile-surface,
+  .physical-target[data-phase="pressed"] > .tactile-surface,
+  .physical-target[data-phase="release"] > .tactile-surface,
+  .physical-target .touch-echo {
     animation: none !important;
     transition: none !important;
     scale: 1;
     translate: 0 0;
-    filter: none;
-    outline: 1px solid var(--color-wood, #c4a882);
+  }
+  .physical-target {
+    outline: 1px solid var(--color-wood);
     outline-offset: 2px;
   }
   .physical-target:focus-visible {
-    outline: 2px solid var(--color-lamp, #e8c49a);
-    outline-offset: 4px;
+    outline-width: 2px;
+    outline-color: var(--color-lamp);
   }
 }

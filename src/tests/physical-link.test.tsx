@@ -44,16 +44,16 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("互動回饋不影響導覽", () => {
-  it("完整觸控鬆手才輕震，點選立即導航", () => {
+  it("觸控按下輕震一次，鬆手不重複，點選立即導航", () => {
     const link = renderLink();
     fireEvent.pointerDown(link);
-    expect(vibrate).not.toHaveBeenCalled();
+    expect(vibrate).toHaveBeenCalledExactlyOnceWith(10);
     fireEvent.pointerUp(link);
     expect(vibrate).toHaveBeenCalledExactlyOnceWith(10);
     fireEvent.click(link);
     expect(screen.getByRole("heading", { name: "下一頁" })).toBeVisible();
   });
-  it("觸控取消及離開目標不震動", () => {
+  it("觸控取消及離開目標不追加震動", () => {
     const link = renderLink();
     fireEvent.pointerDown(link);
     fireEvent.pointerCancel(link);
@@ -61,14 +61,14 @@ describe("互動回饋不影響導覽", () => {
     fireEvent.pointerDown(link);
     fireEvent.pointerLeave(link);
     fireEvent.pointerUp(link);
-    expect(vibrate).not.toHaveBeenCalled();
+    expect(vibrate).toHaveBeenCalledTimes(2);
   });
-  it("捲動手勢不被誤判為按下與鬆開", () => {
+  it("捲動取消回彈，鬆手不追加震動", () => {
     const link = renderLink();
     fireEvent.pointerDown(link);
     fireEvent.pointerMove(link, { clientY: 35 });
     fireEvent.pointerUp(link);
-    expect(vibrate).not.toHaveBeenCalled();
+    expect(vibrate).toHaveBeenCalledTimes(1);
   });
   it("滑鼠與右鍵不觸發手機震動", () => {
     const link = renderLink();
@@ -83,8 +83,8 @@ describe("互動回饋不影響導覽", () => {
       throw new Error("unsupported");
     });
     const link = renderLink();
-    fireEvent.pointerDown(link);
-    expect(() => fireEvent.pointerUp(link)).not.toThrow();
+    expect(() => fireEvent.pointerDown(link)).not.toThrow();
+    fireEvent.pointerUp(link);
     fireEvent.click(link);
     expect(screen.getByRole("heading", { name: "下一頁" })).toBeVisible();
   });

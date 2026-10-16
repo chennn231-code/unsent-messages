@@ -1,14 +1,5 @@
-/* Homepage preview; all SVG pigment colors inherit tokens. No text filters. */
+/* Authored storybook composition. No preset cards, backdrop blur, or shadow stacks. */
 :root {
-  --bg-night: #2a2d3e;
-  --bg-night-secondary: #1e2030;
-  --color-lamp: #e8c49a;
-  --color-paper: #f0e6d3;
-  --color-wood: #c4a882;
-  --color-accent-warm: #d4956b;
-  --color-accent-cool: #8fa6a8;
-  --color-star: #f5e6c8;
-  --color-pencil: #8a6e4a;
   --color-paper-hover: color-mix(
     in srgb,
     var(--color-lamp) 15%,
@@ -20,40 +11,23 @@
     var(--color-wood)
   );
 }
-.app-shell.pastel-home {
-  --background-night: var(--bg-night);
-  --background-navy: var(--bg-night-secondary);
-  --text-primary: var(--color-paper);
-  --text-secondary: #b8afa3;
-  --text-accent: var(--color-accent-warm);
-  --paper-background: var(--color-paper);
-  color: var(--text-primary);
-  background-color: var(--bg-night);
-  background-image: url("../assets/paper-grain.svg");
-  background-size: 11.25rem 11.25rem;
+.story-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
 }
-.pastel-home .site-header,
-.pastel-home .site-footer,
-.pastel-home main {
-  max-width: 72.5rem;
+.night-star {
+  position: absolute;
+  aspect-ratio: 1;
+  display: block;
+  color: var(--color-paper);
 }
-.pastel-home .site-header {
-  border: 0;
-  padding-block: 1.875rem 1.75rem;
-  position: relative;
-}
-.pastel-home .brand {
-  font-weight: 400;
-  letter-spacing: 0.09em;
-}
-.pastel-home .brand-stamp {
-  border: 0;
-  color: var(--color-lamp);
-  background: none;
-  transform: rotate(-6deg);
-  position: relative;
-  width: 3rem;
-  height: 3rem;
+.night-star .hand-drawn-star {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .paper-surface {
   position: absolute;
@@ -72,46 +46,14 @@
   height: auto;
   flex-shrink: 0;
 }
-.pastel-home .brand small {
-  color: var(--text-secondary);
+.hand-drawn-star {
+  width: 1.4rem;
+  height: 1.45rem;
+  display: inline-block;
 }
-.pastel-home nav a {
-  padding-inline: 0.75rem;
-}
-.pastel-home nav a.active::after {
-  width: 2rem;
-  height: 0.2rem;
-  left: calc(50% - 1rem);
-  bottom: 0;
-  border-radius: 35% 19% 30% 24%;
-  background: var(--color-wood);
-  opacity: 0.65;
-  transform: rotate(-4deg);
-}
-.pastel-home a:focus-visible {
-  outline-color: var(--color-lamp);
-}
-.pastel-home .home-hero {
-  min-height: 38.125rem;
-  grid-template-columns: 0.94fr 1.16fr;
-  gap: 0;
-}
-.pastel-home .hero-copy {
-  padding: 3.625rem 1rem 3.375rem 0.625rem;
-  min-width: 0;
-}
-.pastel-home .eyebrow {
-  color: var(--color-lamp);
-  font-size: var(--font-size-caption);
-  letter-spacing: 0.13em;
-  margin-bottom: 1.625rem;
-}
-.pastel-home .eyebrow span {
-  width: 1.44rem;
-  height: 0.625rem;
-  background: none;
-  transform: rotate(-7deg);
-  position: relative;
+.mailbox-mark {
+  width: 2.7rem;
+  height: 2.9rem;
 }
 .pencil-divider {
   display: block;
@@ -122,158 +64,375 @@
   color: var(--color-wood);
   pointer-events: none;
 }
-.home-bottom > .pencil-divider,
 .site-footer > .pencil-divider {
   top: 0;
   bottom: auto;
 }
-.pastel-home h1 {
-  color: var(--color-paper);
+.home-hero {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: 3rem;
+  min-height: 35rem;
+  padding: 2.3rem 0 1.8rem;
+  animation: story-arrive 220ms ease-out both;
+}
+.hero-copy {
+  padding: 1.5rem 0 2rem;
+  min-width: 0;
+}
+.hero-copy .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.6rem;
+}
+.eyebrow > span {
+  width: 1.6rem;
+  height: 0.625rem;
+  position: relative;
+  flex-shrink: 0;
 }
 .home-description {
   font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  max-width: 24rem;
   font-size: 1.0625rem;
   line-height: 2;
-  max-width: 24rem;
+  margin: 1.5rem 0 0;
   text-wrap: pretty;
-  color: var(--text-primary);
-  margin: 1.375rem 0 0;
 }
-.pastel-home .hero-subtitle {
-  color: var(--color-paper);
-  margin-block: 0.875rem 2.125rem;
+.hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin: 0.8rem 0 1.8rem;
 }
-.pastel-home .primary-button {
-  position: relative;
-  isolation: isolate;
-  border: 0;
+.hero-footnote {
+  font-size: var(--font-size-caption);
+  color: var(--text-secondary);
+  margin: 1rem 0 0;
+}
+.pastel-home .primary-button > .tactile-surface {
   background: none;
-  color: var(--paper-text);
-  min-height: 3.625rem;
-  padding: 0.875rem 1.75rem;
-  gap: 1.375rem;
-}
-.pastel-home .primary-button::before,
-.pastel-home .primary-button::after {
-  content: none;
 }
 .pastel-home .primary-button:hover {
   --color-paper: var(--color-paper-hover);
 }
-.pastel-home .hero-footnote {
-  margin-top: 1.375rem;
-}
 .pastel-post-office {
+  position: relative;
   margin: 0;
   min-width: 0;
-  align-self: center;
-}
-.pastel-post-office img {
-  display: block;
-  width: 100%;
-  height: auto;
+  isolation: isolate;
+  padding-bottom: 0;
 }
 .post-office-entry {
   display: block;
-  position: relative;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  border-radius: 1.5rem;
   text-align: center;
+  position: relative;
+}
+.post-office-entry > .tactile-surface {
+  display: block;
+}
+.post-office-entry img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+.story-ground {
+  position: absolute;
+  width: 104%;
+  height: 25%;
+  left: -2%;
+  bottom: 4rem;
+  z-index: -1;
+  opacity: 0.55;
+  pointer-events: none;
 }
 .post-office-entry-label {
   display: inline-block;
   min-height: 2.75rem;
-  padding: 0.625rem 1rem;
-  line-height: 1.8;
+  padding: 0.6rem 1rem;
   font-size: var(--font-size-caption);
-  color: var(--text-primary);
+  line-height: 1.8;
+  color: var(--color-paper);
   text-decoration: underline;
-  text-underline-offset: 0.3em;
   text-decoration-color: var(--color-wood);
+  text-underline-offset: 0.3em;
 }
 .pastel-post-office figcaption {
   text-align: center;
-  font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
   font-size: var(--font-size-caption);
-  letter-spacing: 0.08em;
   color: var(--text-secondary);
-  margin-top: 0.5rem;
+  line-height: 1.8;
+  margin: 0.1rem 0 0;
+}
+.post-office-paths {
+  position: relative;
+  padding: 1.3rem 0 2rem;
+}
+.route-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.route-section-heading p {
+  font-family: "Noto Serif TC", serif;
+  font-size: var(--font-size-heading);
+  margin: 0;
+}
+.route-section-heading > span {
+  font-size: var(--font-size-caption);
+  color: var(--text-secondary);
+}
+.post-paths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+.place-entry {
+  --target-padding: 1rem 0;
+  min-width: 0;
+  color: var(--color-paper);
+  position: relative;
+}
+.place-entry > .tactile-surface {
+  gap: 1rem;
+  align-items: center;
+}
+.place-entry::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px dashed var(--color-wood);
+  opacity: 0.25;
+  rotate: -0.3deg;
+}
+.route-icon {
+  width: 3.5rem;
+  height: 4rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-wood);
+  transform-origin: 50% 80%;
+  transition: rotate 120ms ease-out;
+}
+.route-icon .envelope-mark {
+  width: 3.5rem;
+  rotate: -8deg;
+}
+.route-icon .hand-drawn-star {
+  width: 2.8rem;
+  height: 3rem;
+  color: var(--color-lamp);
+  rotate: 9deg;
+}
+.place-copy {
+  display: block;
+  min-width: 0;
+  flex: 1;
+}
+.route-number {
+  display: block;
+  font-size: var(--font-size-caption);
+  line-height: 1;
+  opacity: 0.6;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.45rem;
+}
+.route-title {
+  display: block;
+  font-family: "Noto Serif TC", serif;
+  font-size: 1.125rem;
+  font-weight: 500;
   line-height: 1.8;
 }
-.pastel-home .home-bottom {
-  position: relative;
+.route-description {
+  display: block;
+  font-size: var(--font-size-caption);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-top: 0.2rem;
+  overflow-wrap: anywhere;
+}
+.route-state {
+  display: block;
+  font-size: var(--font-size-caption);
+  color: var(--color-wood);
+  line-height: 1.8;
+  margin-top: 0.35rem;
+}
+.route-arrow {
+  align-self: flex-end;
+  font-size: 1.2rem;
+  color: var(--color-wood);
+}
+.physical-target[data-phase="pressed"] .route-icon {
+  rotate: -5deg;
+}
+.touch-echo {
+  border-radius: 40% 45% 38% 42%;
+}
+.place-entry .touch-echo {
   border: 0;
-  background: none;
-  padding: 1.75rem 0.625rem 2.125rem;
+  border-bottom: 2px dashed var(--color-wood);
+  border-radius: 0;
+  inset: auto 0 0;
+  height: 1px;
 }
-.pastel-home .small-star {
-  color: var(--color-lamp);
-  display: inline-block;
-  transform: rotate(-13deg);
-  vertical-align: middle;
+.mailbox-story {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1rem 3rem;
+  align-items: center;
 }
-.hand-drawn-star {
-  width: 1.4rem;
-  height: 1.45rem;
-  display: inline-block;
+.mailbox-story .privacy-note {
+  grid-column: 1/-1;
+  border-top: 1px dashed rgb(196 168 130 / 0.25);
+  padding-top: 1.25rem;
+  max-width: 44rem;
 }
-.sky-mark .hand-drawn-star {
-  width: 2.5rem;
-  height: 2.6rem;
-  color: var(--text-accent);
+.mailbox-vignette {
+  text-align: center;
+  align-self: center;
 }
-.pastel-home .site-footer {
+.open-mailbox-illustration {
+  display: block;
+  width: 100%;
+  max-width: 23rem;
+  margin-inline: auto;
+  height: auto;
+}
+.vignette-caption {
+  font-family: "Noto Serif TC", serif;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+.sky-story {
+  min-height: 35rem;
+  isolation: isolate;
+  padding-top: 2rem;
+}
+.sky-story .page-narrative {
   position: relative;
-  border: 0;
-  background: none;
-  padding-top: 1.44rem;
+  z-index: 1;
+  max-width: 30rem;
 }
-@media (max-width: 900px) {
-  .pastel-home .home-hero {
-    grid-template-columns: 1fr 1.1fr;
+.roof-silhouette {
+  position: absolute;
+  bottom: -2rem;
+  right: -2rem;
+  width: 75%;
+  height: 45%;
+  z-index: -1;
+  pointer-events: none;
+}
+.page-narrative {
+  min-width: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .place-entry:hover .route-title,
+  .post-office-entry:hover .post-office-entry-label {
+    color: var(--color-lamp);
   }
-  .pastel-home .hero-copy {
-    padding-left: 0;
+}
+@media (max-width: 1000px) {
+  .post-paths {
+    gap: 1.5rem;
   }
-  .pastel-home nav a {
-    padding-inline: 0.3125rem;
+  .route-icon {
+    width: 2.75rem;
+  }
+  .route-icon .envelope-mark {
+    width: 2.75rem;
+  }
+  .place-entry > .tactile-surface {
+    gap: 0.75rem;
   }
 }
 @media (max-width: 768px) {
-  .pastel-home .site-header {
-    padding-block: 1.375rem 1.0625rem;
-  }
-  .pastel-home .home-hero {
+  .home-hero {
     grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding: 1.5rem 0 1rem;
     min-height: 0;
   }
-  .pastel-home .hero-copy {
-    padding: 2.625rem 0 0.875rem;
+  .hero-copy {
+    padding: 0.8rem 0 0;
   }
-  .pastel-home .eyebrow {
-    letter-spacing: 0.08em;
-    margin-bottom: 1.44rem;
+  .hero-copy .eyebrow {
+    margin-bottom: 1.3rem;
   }
-  .pastel-home .hero-subtitle {
-    margin-block: 1.125rem 1.75rem;
+  .home-description {
+    margin-top: 1.25rem;
   }
-  .pastel-home nav a {
-    padding-inline: 0.25rem;
+  .hero-subtitle {
+    font-size: 1.0625rem;
   }
   .pastel-post-office {
     width: 100%;
-    max-width: 33.125rem;
-    margin: 0.5rem auto 1.875rem;
+    max-width: 33rem;
+    margin: 0 auto;
   }
-  .pastel-post-office figcaption {
-    margin-top: 0.125rem;
+  .story-ground {
+    height: 25%;
+    bottom: 4.5rem;
   }
-  .pastel-home .home-bottom {
-    padding: 1.5rem 0 1.875rem;
+  .post-office-paths {
+    padding-top: 1rem;
+  }
+  .route-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .post-paths {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .place-entry {
+    --target-padding: 1.1rem 0;
+  }
+  .route-icon {
+    width: 3rem;
+  }
+  .route-icon .envelope-mark {
+    width: 3rem;
+  }
+  .place-entry > .tactile-surface {
+    gap: 1.25rem;
+  }
+  .mailbox-story {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .mailbox-story .privacy-note {
+    grid-column: 1;
+  }
+  .open-mailbox-illustration {
+    max-width: 18rem;
+  }
+  .sky-story {
+    min-height: 32rem;
+    padding-top: 0.5rem;
+  }
+  .roof-silhouette {
+    width: 100%;
+    height: 36%;
+    right: 0;
+    bottom: -1rem;
+  }
+  .night-star .hand-drawn-star {
+    min-width: 0;
   }
 }
-
-.emotional-copy {
-  font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+@media (prefers-reduced-motion: reduce) {
+  .route-icon {
+    rotate: 0 !important;
+  }
 }

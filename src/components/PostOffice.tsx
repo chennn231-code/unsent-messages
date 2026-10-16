@@ -1,9 +1,11 @@
-import postOffice from "../assets/post-office-pastel-v1.webp";
+import postOffice from "../assets/post-office-pastel-v2.webp";
+import { Ground } from "./StoryScene";
 import { copy } from "../content/zh-TW";
 import { PhysicalLink } from "./PhysicalLink";
 export function PostOffice() {
   return (
     <figure className="pastel-post-office">
+      <Ground />
       <PhysicalLink
         className="post-office-entry"
         to="/write"

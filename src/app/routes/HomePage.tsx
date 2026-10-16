@@ -1,4 +1,6 @@
 import {
+  EnvelopeMark,
+  MailboxMark,
   HandDrawnStar,
   PaperSurface,
   PencilDivider,
@@ -24,6 +26,7 @@ export function HomePage() {
             className="primary-button"
             to="/write"
             feedback="envelope"
+            idle
             idlePeriod={3.7}
           >
             <PaperSurface />
@@ -34,15 +37,43 @@ export function HomePage() {
         </div>
         <PostOffice />
       </section>
-      <section className="home-bottom" aria-label={copy.home.aboutLabel}>
-        <PencilDivider />
-        <p>
-          <span className="small-star" aria-hidden="true">
-            <HandDrawnStar />
-          </span>
-          {copy.home.closing}
-        </p>
-        <span>{copy.home.closingNote}</span>
+      <section className="post-office-paths" aria-label={copy.home.routeLabel}>
+        <div className="route-section-heading">
+          <p>{copy.home.closing}</p>
+          <span>{copy.home.closingNote}</span>
+        </div>
+        <div className="post-paths">
+          {copy.home.routes.map((route, index) => (
+            <PhysicalLink
+              to={route.to}
+              key={route.to}
+              className={`place-entry place-entry-${route.icon}`}
+              idlePeriod={3.2 + index * 0.3}
+              aria-label={`${route.title}，${route.state}`}
+            >
+              <span className="route-icon" aria-hidden="true">
+                {route.icon === "letter" ? (
+                  <EnvelopeMark />
+                ) : route.icon === "mailbox" ? (
+                  <MailboxMark />
+                ) : (
+                  <HandDrawnStar />
+                )}
+              </span>
+              <span className="place-copy">
+                <span className="route-number" aria-hidden="true">
+                  0{index + 1}
+                </span>
+                <span className="route-title">{route.title}</span>
+                <span className="route-description">{route.description}</span>
+                <span className="route-state">{route.state}</span>
+              </span>
+              <span className="route-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </PhysicalLink>
+          ))}
+        </div>
       </section>
     </>
   );

@@ -48,9 +48,9 @@ export function PaperSurface({ stamp = false }: { stamp?: boolean }) {
           />
           <feColorMatrix in="noise" type="saturate" values="0" result="mono" />
           <feComponentTransfer in="mono" result="softGrain">
-            <feFuncR type="linear" slope=".18" intercept=".82" />
-            <feFuncG type="linear" slope=".18" intercept=".82" />
-            <feFuncB type="linear" slope=".18" intercept=".82" />
+            <feFuncR type="linear" slope=".12" intercept=".88" />
+            <feFuncG type="linear" slope=".12" intercept=".88" />
+            <feFuncB type="linear" slope=".12" intercept=".88" />
           </feComponentTransfer>
           <feBlend
             in="SourceGraphic"
@@ -71,7 +71,7 @@ export function PaperSurface({ stamp = false }: { stamp?: boolean }) {
           d={ribbon}
           fill="var(--color-pencil)"
           fillRule="evenodd"
-          opacity={stamp ? ".72" : ".55"}
+          opacity={stamp ? ".55" : ".42"}
         />
         <path
           d={outline}
@@ -81,7 +81,7 @@ export function PaperSurface({ stamp = false }: { stamp?: boolean }) {
           strokeDasharray="13 .7 8 1.1 19 .6"
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity=".48"
+          opacity=".32"
           vectorEffect="non-scaling-stroke"
         />
       </g>
@@ -172,6 +172,39 @@ export function HandDrawnStar() {
         opacity=".32"
         d="M13 6 C15 9 13 12 16 13 C19 13 21 11 23 12 C20 14 17 14 16 16 C16 19 18 21 18 23 C15 20 13 18 11 19 C8 20 7 21 6 22 C8 18 9 15 7 13 C11 14 13 11 13 6 Z"
       />
+    </svg>
+  );
+}
+
+export function MailboxMark() {
+  return (
+    <svg
+      className="mailbox-mark"
+      viewBox="0 0 44 46"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path
+          strokeWidth="1.4"
+          d="M9 9 C14 4 29 6 34 10 C37 18 34 27 35 35 C26 37 17 34 8 36 C7 28 6 16 9 9 Z"
+        />
+        <path
+          strokeWidth="1.2"
+          d="M12 15 C18 14 26 16 31 14 M13 25 C18 23 26 25 30 24 M15 36 C16 39 14 42 15 44 M29 36 C28 39 30 42 29 44"
+        />
+        <path
+          fill="currentColor"
+          opacity=".18"
+          stroke="none"
+          d="M12 19 C18 18 26 20 31 18 C32 23 30 28 31 31 C24 33 18 30 12 32 C11 27 13 23 12 19 Z"
+        />
+      </g>
     </svg>
   );
 }

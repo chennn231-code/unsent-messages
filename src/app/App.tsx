@@ -10,6 +10,7 @@ import { HomePage } from "./routes/HomePage";
 import { WritePage } from "../features/editor/WritePage";
 import { MailboxPage } from "../features/private-mailbox/MailboxPage";
 import { SkyPage } from "../features/public-sky/SkyPage";
+import { StoryAtmosphere } from "../components/StoryScene";
 import { copy } from "../content/zh-TW";
 import { PhysicalLink, PhysicalNavLink } from "../components/PhysicalLink";
 import "../styles/interaction.css";
@@ -26,7 +27,10 @@ export function App() {
     }
   }, [pathname]);
   return (
-    <div className={`app-shell${pathname === "/" ? " pastel-home" : ""}`}>
+    <div
+      className={`app-shell story-theme${pathname === "/" ? " pastel-home" : ""}`}
+    >
+      <StoryAtmosphere home={isPastelHome} />
       <a className="skip-link" href="#main">
         {copy.navigation.skipToMain}
       </a>
@@ -35,7 +39,6 @@ export function App() {
           className="brand"
           to="/"
           aria-label={copy.brand.homeLabel}
-          idlePeriod={3.4}
         >
           <span className="brand-stamp" aria-hidden="true">
             {isPastelHome ? (
@@ -52,11 +55,8 @@ export function App() {
             <small>{copy.brand.englishName}</small>
           </span>
         </PhysicalLink>
-        <nav
-          aria-label={copy.navigation.label}
-          className="flex flex-wrap items-center"
-        >
-          <PhysicalNavLink to="/" end idlePeriod={3.1}>
+        <nav aria-label={copy.navigation.label} className="main-navigation">
+          <PhysicalNavLink to="/" end idlePeriod={3.2}>
             {copy.navigation.home}
           </PhysicalNavLink>
           <PhysicalNavLink to="/write" idlePeriod={3.5}>
