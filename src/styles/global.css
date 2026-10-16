@@ -1,0 +1,681 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@400;500&display=swap");
+@import "tailwindcss";
+:root {
+  --background-night: #0b1018;
+  --background-navy: #182634;
+  --text-primary: #e5d8c4;
+  --text-secondary: #c6bfb4;
+  --text-accent: #b57a43;
+  --paper-background: #e5d8c4;
+  --paper-text: #514638;
+  --font-size-title: 2.25rem;
+  --font-size-heading: 1.5rem;
+  --font-size-body: 1rem;
+  --font-size-letter: 1.0625rem;
+  --font-size-caption: 0.875rem;
+  --line-height-body: 1.8;
+  --line-height-heading: 1.8;
+  --line-height-letter: 2;
+  --letter-spacing-title: 0.05em;
+  --letter-spacing-body: 0.01em;
+  --letter-spacing-letter: 0.02em;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  color: var(--text-primary);
+  background: var(--background-night);
+  font-size: 100%;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #f1c48e;
+  outline-offset: 5px;
+}
+main:focus {
+  outline: none;
+}
+p,
+h1,
+h2 {
+  overflow-wrap: anywhere;
+}
+p {
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+}
+h1,
+h2,
+.brand,
+.hero-subtitle,
+.home-bottom p {
+  font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+}
+h1 {
+  font-size: var(--font-size-title);
+  font-weight: 400;
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-title);
+  margin: 0;
+}
+h2 {
+  font-size: var(--font-size-heading);
+  font-weight: 400;
+  line-height: 1.8;
+}
+.app-shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) max(24px, env(safe-area-inset-right))
+    env(safe-area-inset-bottom) max(24px, env(safe-area-inset-left));
+  background: radial-gradient(ellipse at 70% 45%, #18263466, transparent 65%);
+}
+.site-header,
+.site-footer,
+main {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+}
+.site-header {
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid #e5d8c417;
+}
+.brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 1.125rem;
+  letter-spacing: 0.12em;
+}
+.brand-stamp {
+  border: 1px solid #b57a4366;
+  width: 44px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: #cfab80;
+  font-size: 1.65rem;
+  transform: rotate(-5deg);
+}
+.brand small {
+  display: block;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 0.625rem;
+  letter-spacing: 0.25em;
+  color: var(--text-secondary);
+  margin-top: 7px;
+}
+nav {
+  gap: 14px;
+}
+nav a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-caption);
+  color: var(--text-secondary);
+  padding: 8px 9px;
+  position: relative;
+}
+nav a.active {
+  color: var(--text-primary);
+}
+nav a.active:after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: calc(50% - 2px);
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: var(--text-accent);
+}
+nav a:hover {
+  color: #fff1df;
+}
+main {
+  flex: 1;
+}
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.14fr;
+  align-items: center;
+  min-height: 590px;
+  gap: 20px;
+}
+.hero-copy {
+  padding: 52px 0 42px 28px;
+  z-index: 1;
+}
+.eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  color: #c1aa8d;
+  margin: 0 0 28px;
+  line-height: 2;
+}
+.eyebrow span {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--text-accent);
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.hero-subtitle {
+  color: var(--text-secondary);
+  margin: 22px 0 35px;
+  letter-spacing: 0.06em;
+  font-size: 1.0625rem;
+}
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  min-height: 52px;
+  padding: 12px 25px;
+  border: 1px solid #b99772;
+  background: #d5b58b;
+  color: #29241e;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.primary-button:hover {
+  background: #e5c59b;
+}
+.hero-footnote {
+  font-size: var(--font-size-caption);
+  color: var(--text-secondary);
+  margin: 20px 0 0;
+}
+.home-bottom {
+  border-top: 1px solid #e5d8c419;
+  padding: 27px 28px 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+.home-bottom p {
+  margin: 0;
+  font-size: 1rem;
+}
+.home-bottom > span {
+  font-size: var(--font-size-caption);
+}
+.small-star {
+  color: var(--text-accent);
+  margin-right: 15px;
+}
+.site-footer {
+  padding: 24px 0;
+  border-top: 1px solid #e5d8c412;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.8;
+}
+.site-footer i {
+  margin: 0 8px;
+  color: var(--text-accent);
+}
+.page-content {
+  max-width: 800px;
+  margin: 68px auto 80px;
+}
+.intro {
+  color: var(--text-secondary);
+  margin: 16px 0 38px;
+}
+.quiet-note,
+.privacy-note {
+  font-size: var(--font-size-caption);
+  color: var(--text-secondary);
+}
+.privacy-note {
+  margin-top: 24px;
+}
+.letter-paper {
+  background: var(--paper-background);
+  color: var(--paper-text);
+  padding: 40px 42px;
+  box-shadow: 0 10px 55px #0003;
+  transform: rotate(-0.5deg);
+  font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  font-size: var(--font-size-letter);
+  letter-spacing: var(--letter-spacing-letter);
+  line-height: var(--line-height-letter);
+  border-radius: 2px;
+}
+.letter-paper p {
+  line-height: 2;
+}
+.paper-lines {
+  height: 100px;
+  background: repeating-linear-gradient(
+    transparent 0 33px,
+    #51463824 33px 34px
+  );
+}
+.paper-note {
+  font-size: 1rem;
+  margin-top: 28px;
+}
+.empty-state {
+  border: 1px solid #e5d8c423;
+  background: #18263455;
+  text-align: center;
+  padding: 48px 24px;
+}
+.empty-state p {
+  color: var(--text-secondary);
+}
+.envelope-icon,
+.sky-mark {
+  font-size: 2.5rem;
+  color: #c7a783;
+}
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 16px;
+  background: var(--paper-background);
+  color: var(--paper-text);
+  padding: 12px;
+  z-index: 20;
+  transform: translateY(-180%);
+}
+.skip-link:focus {
+  transform: none;
+}
+/* A static CSS scene: no external images, animation or personal content. */
+.night-scene {
+  position: relative;
+  height: 440px;
+  width: 100%;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 50% 64%, #b57a4317, transparent 58%);
+  overflow: hidden;
+}
+.moon {
+  position: absolute;
+  right: 18%;
+  top: 16%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #d0c9ad;
+  box-shadow: 0 0 45px #d0c9ad15;
+  opacity: 0.6;
+}
+.distant-building {
+  position: absolute;
+  bottom: 76px;
+  background: #121c27;
+  border-top: 1px solid #23303b;
+}
+.building-one {
+  left: 0;
+  width: 22%;
+  height: 180px;
+}
+.building-two {
+  right: 0;
+  width: 20%;
+  height: 220px;
+}
+.post-office {
+  position: absolute;
+  bottom: 77px;
+  left: 15%;
+  width: 70%;
+  height: 230px;
+  background: linear-gradient(90deg, #29323a, #374049 45%, #242e38);
+  border: 1px solid #4a4d4d;
+  box-shadow: 0 24px 50px #0008;
+}
+.roof {
+  position: absolute;
+  top: -17px;
+  left: -5%;
+  height: 24px;
+  width: 110%;
+  background: linear-gradient(#465059, #1c2730);
+  clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
+  border-bottom: 4px solid #111b25;
+}
+.shop-sign {
+  position: relative;
+  margin: 19px auto 14px;
+  width: 80%;
+  text-align: center;
+  font-family: "Noto Serif TC", serif;
+  font-size: 1rem;
+  letter-spacing: 0.13em;
+  color: #dfc397;
+  background: #20262b;
+  border: 1px solid #78604788;
+  padding: 7px;
+  box-shadow: 0 1px 14px #d5a26a17;
+}
+.shop-sign span {
+  display: block;
+  font-size: 0.45rem;
+  letter-spacing: 0.2em;
+  margin-top: 4px;
+}
+.shop-front {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+  padding: 0 18px;
+  height: 130px;
+}
+.window {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  background: radial-gradient(
+    ellipse at 50% 10%,
+    #e1b67a,
+    #9c7147 60%,
+    #4c4540
+  );
+  border: 6px solid #1a242c;
+  box-shadow: 0 0 24px #d5a26a17;
+  position: relative;
+}
+.window:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 48%;
+  height: 5px;
+  background: #242a2c;
+}
+.window i {
+  flex: 1;
+  border-right: 3px solid #292c2b;
+}
+.window i:last-child {
+  border: 0;
+}
+.door {
+  width: 25%;
+  background: #1c292e;
+  border: 5px solid #152029;
+  padding: 6px;
+  position: relative;
+}
+.door div {
+  height: 65%;
+  background: linear-gradient(#c39c67, #77624b);
+  border: 3px solid #38403e;
+}
+.door span {
+  position: absolute;
+  right: 8px;
+  bottom: 25px;
+  width: 4px;
+  height: 8px;
+  background: #d5ad74;
+}
+.steps {
+  position: absolute;
+  bottom: -13px;
+  height: 13px;
+  left: -3%;
+  width: 106%;
+  background: linear-gradient(#454a4b 50%, #272f36 50%);
+  border-bottom: 3px solid #181f26;
+}
+.street {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  border-top: 1px solid #4c484044;
+  background: radial-gradient(ellipse at 50% 0, #bd8d5625, transparent 70%);
+  transform: perspective(100px) rotateX(8deg);
+}
+.street-lamp {
+  position: absolute;
+  bottom: 72px;
+  left: 7%;
+  height: 210px;
+  width: 4px;
+  background: #4e5350;
+}
+.street-lamp:before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 0;
+  width: 28px;
+  height: 32px;
+  background: linear-gradient(#d9b06c, #b58d49);
+  border: 5px solid #3a4245;
+  box-shadow: 0 0 55px #e9b66130;
+}
+.street-lamp:after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -15px;
+  width: 34px;
+  height: 8px;
+  background: #3a4245;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.postbox {
+  position: absolute;
+  bottom: 70px;
+  right: 8%;
+  height: 67px;
+  width: 31px;
+  background: linear-gradient(90deg, #69403a, #8c5144, #593b37);
+  border-radius: 10px 10px 1px 1px;
+  box-shadow: 5px 5px 10px #0006;
+}
+.postbox:before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  right: 5px;
+  height: 4px;
+  background: #291f22;
+}
+.postbox span {
+  position: absolute;
+  top: 29px;
+  left: 5px;
+  color: #dfcbb0;
+  font-size: 6px;
+  letter-spacing: 1px;
+}
+@media (min-width: 1500px) {
+  .home-hero {
+    min-height: 680px;
+  }
+}
+@media (max-width: 900px) {
+  .hero-copy {
+    padding-left: 0;
+  }
+  .site-header {
+    gap: 12px;
+  }
+  .brand {
+    font-size: 1rem;
+  }
+  nav {
+    gap: 2px;
+  }
+  .home-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+  .shop-front {
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .home-bottom {
+    padding-inline: 0;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    --font-size-title: 1.75rem;
+    --font-size-heading: 1.25rem;
+    --font-size-caption: 0.9375rem;
+  }
+  .app-shell {
+    padding-inline: max(20px, env(safe-area-inset-left))
+      max(20px, env(safe-area-inset-right));
+  }
+  .site-header {
+    padding: 20px 0 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .brand small {
+    font-size: 0.9375rem;
+    letter-spacing: 0.12em;
+  }
+  nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
+  nav a {
+    padding-inline: 4px;
+  }
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 0;
+    min-height: 0;
+  }
+  .hero-copy {
+    padding: 48px 0 0;
+  }
+  .eyebrow {
+    font-size: 0.9375rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+  .hero-subtitle {
+    margin: 18px 0 28px;
+    font-size: 1rem;
+  }
+  .hero-footnote {
+    margin-top: 16px;
+  }
+  .night-scene {
+    height: 330px;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+  .post-office {
+    height: 195px;
+    bottom: 62px;
+  }
+  .shop-sign {
+    margin-top: 12px;
+    font-size: 0.9375rem;
+  }
+  .shop-front {
+    height: 108px;
+  }
+  .building-one,
+  .building-two {
+    bottom: 62px;
+  }
+  .street-lamp {
+    height: 180px;
+    bottom: 58px;
+  }
+  .postbox {
+    bottom: 57px;
+  }
+  .street {
+    bottom: 3px;
+  }
+  .moon {
+    top: 9%;
+    right: 13%;
+    height: 22px;
+    width: 22px;
+  }
+  .home-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 0 30px;
+  }
+  .site-footer {
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 0;
+  }
+  .page-content {
+    margin: 40px auto 48px;
+  }
+  .letter-paper {
+    padding: 24px 20px;
+    transform: none;
+  }
+  .empty-state {
+    padding: 30px 16px;
+  }
+  .shop-sign span {
+    font-size: 0.45rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.no-break {
+  white-space: nowrap;
+}
+.brand {
+  max-width: 100%;
+}
+.brand > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.brand-stamp {
+  flex-shrink: 0;
+}

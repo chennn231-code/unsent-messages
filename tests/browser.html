@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sprint 01 真實 IndexedDB 驗證</title>
+  </head>
+  <body>
+    <h1>真實 IndexedDB 驗證（僅開發環境）</h1>
+    <p>僅操作獨立測試資料庫，不包含使用者信件。</p>
+    <button id="run">執行真實資料庫測試</button
+    ><button id="persist">驗證重新整理後持久化</button
+    ><button id="motion">驗證互動與減少動態</button>
+    <button id="zoom">驗證 200% 文字放大</button
+    ><iframe
+      id="zoom-frame"
+      title="文字放大測試頁面"
+      style="
+        display: block;
+        width: 320px;
+        height: 700px;
+        max-width: 100%;
+        border: 1px solid #888;
+      "
+      hidden
+    ></iframe>
+    <pre id="result" aria-live="polite"></pre>
+    <script type="module" src="/src/tests/browser-harness.ts"></script>
+  </body>
+</html>
